@@ -1,4 +1,4 @@
-function Obstacle2(game) {
+function fire(game) {
   this.game = game;
 
   this.w = 1500;

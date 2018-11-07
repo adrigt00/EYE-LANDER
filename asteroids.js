@@ -2,20 +2,19 @@ function Asteroids(game) {
   this.game = game;
 
   this.w = 150;
-  this.h = 50;
+  this.h = 150;
 
-  this.dx = 1;
+  this.dx = 5;
 
   this.x = this.game.canvas.width;
-  this.y = this.game.player.y0 + this.game.player.h  - 5;
+  this.y =  Math.floor(Math.random()*(this.game.player.y0 + this.game.player.h  - 5))
+  this.img = new Image();
+  this.img.src = 'img/Green Gas Planet.png';
 }
 
 
 Asteroids.prototype.draw = function() {
-  this.game.ctx.beginPath;
-  this.game.ctx.fillStyle = "yellow";
-  this.game.ctx.fillRect(this.x, this.y, this.w, this.h);
-  this.game.ctx.closedPath;
+  this.game.ctx.drawImage(this.img, this.x, this.y, 80, 80);
 };
 
 Asteroids.prototype.move = function() {

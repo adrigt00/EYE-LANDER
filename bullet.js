@@ -7,9 +7,9 @@ function Bullet(game, x, y) {
   this.r = 5;
 
   this.vx = 10;
-  this.vy = 1;
+  this.vy = 0;
 
-  this.gravity = 0.25;
+  this.gravity = 0;
 }
 
 Bullet.prototype.draw = function() {
