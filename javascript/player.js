@@ -14,8 +14,8 @@ function Player(game) {
   this.img.frames = 1;
   this.img.frameIndex = 0;
 
-  this.w = 80;
-  this.h = 65;
+  this.w = 65;
+  this.h = 55;
   this.vx = 0;
   this.vy = 0;
   this.newPos = function() {
@@ -67,10 +67,10 @@ Player.prototype.setListeners = function() {
       this.shoot();
     } else if (event.keyCode == Right) {
       this.vx += 5;
-      this.x += this.vx;
+      this.x += 10;
     } else if (event.keyCode == Left) {
       this.vx -= 5;
-      this.x -= this.vx;
+      this.x -= 10;
     }
   }.bind(this);
 };
@@ -82,7 +82,7 @@ Player.prototype.shoot = function() {
 };
 
 Player.prototype.move = function() {
-  var gravity = 0.15;
+  var gravity = 0.2;
   if (this.y != this.y0) {
     this.vy += gravity;
     this.y += this.vy;

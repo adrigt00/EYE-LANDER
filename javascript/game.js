@@ -18,15 +18,15 @@ Game.prototype.start = function() {
       }
 
 
-      if (this.framesCounter % 50 === 0) {
+      if (this.framesCounter % 70 === 0) {
         this.generateObstacle();
-      } else if (this.framesCounter % 80 === 0) {
+      } else if (this.framesCounter % 100 === 0) {
         this.generateAsteroids();
-      } else if (this.framesCounter % 90 === 0) {
+      } else if (this.framesCounter % 130 === 0) {
         this.generatefireBall();
-      } else if (this.framesCounter % 70 === 0) {
+      } else if (this.framesCounter % 90 === 0) {
         this.generateAlien();
-      } else if (this.framesCounter % 40 === 0) {
+      } else if (this.framesCounter % 60 === 0) {
         this.generateCoins();
       }
     
@@ -45,7 +45,10 @@ Game.prototype.start = function() {
          if (this.isCollision()) {
            this.gameOver();
          } else if (this.isCollision2()) {
-           this.gameOver();
+          this.lives.forEach(function(live, i) {
+            this.lives.splice(i,1);
+       this.lives++;
+      }.bind(this));
          } else if (this.isCollision3()) {
            this.gameOver();
          } else if (this.isCollision4()) {
@@ -69,7 +72,7 @@ Game.prototype.stop = function() {
 Game.prototype.gameOver = function() {
   this.stop();
 
-  if (confirm("GAME OVER. Play again?")) {
+  if (confirm(`Intenta superar tu puntuacion de ${this.score} pulsando en aceptar!`)) {
     this.reset();
     this.start();
   }
@@ -85,6 +88,7 @@ Game.prototype.reset = function() {
   this.Coins = [];
   this.framesCounter = 0;
   this.score = 0;
+  this.lives = 0;
 };
 Game.prototype.isCollision = function() {
   return this.obstacles.some(
@@ -247,6 +251,26 @@ Game.prototype.drawScore = function() {
   this.ctx.fillStyle = "white";
   this.ctx.fillText(Math.floor(this.score), 50, 50);
 };
-//document.getElementById("new game").onclick = function(){
-  //document.getElementById("canvas").style.display = "none";
-//}
+Game.prototype.drawLives = function() {
+  this.ctx.font = "30px sans-serif";
+  this.ctx.fillStyle = "white";
+  this.ctx.fillText(Math.floor(this.Live), 70, 70);
+};
+
+function ballLeaveScreen() {
+  lives--;
+  if(lives) {
+      livesText.setText('Lives: '+lives);
+      lifeLostText.visible = true;
+      ball.reset(game.world.width*0.5, game.world.height-25);
+      paddle.reset(game.world.width*0.5, game.world.height-5);
+      game.input.onDown.addOnce(function(){
+          lifeLostText.visible = false;
+          ball.body.velocity.set(150, -150);
+      }, this);
+  }
+  else {
+      gameOver();
+      location.reload();
+  }
+}

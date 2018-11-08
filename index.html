@@ -2,21 +2,63 @@
 <html>
 <head>
   <title>My Game</title>
-  <script type="text/javascript" src="obstacle.js"></script>
-  <script type="text/javascript" src="background.js"></script>
-  <script type="text/javascript" src="bullet.js"></script>
-  <script type="text/javascript" src="player.js"></script>
-  <script type="text/javascript" src="fire.js"></script> 
-  <script type="text/javascript" src="alien.js"></script> 
-  <script type="text/javascript" src="coins.js"></script> 
-  <script type="text/javascript" src="asteroids.js"></script>
-  <script type="text/javascript" src="game.js"></script>
+  <script type="text/javascript" src="./javascript/obstacle.js"></script>
+  <script type="text/javascript" src="./javascript/background.js"></script>
+  <script type="text/javascript" src="./javascript/bullet.js"></script>
+  <script type="text/javascript" src="./javascript/player.js"></script>
+  <script type="text/javascript" src="./javascript/fire.js"></script> 
+  <script type="text/javascript" src="./javascript/alien.js"></script> 
+  <script type="text/javascript" src="./javascript/coins.js"></script> 
+  <script type="text/javascript" src="./javascript/asteroids.js"></script>
+  <script type="text/javascript" src="./javascript/game.js"></script>
 
-  <script type="text/javascript" src="index.js"></script>
+  <script type="text/javascript" src="./javascript/index.js"></script>
 
-  <link rel="stylesheet" type="text/css" href="style.css">
+  <link rel="stylesheet" type="text/css" href="./style/main.css">
+  <style>
+      body {
+        font-size: 2em;
+        text-align: center;
+      }
+      #main{
+        display: none;
+      }
+      #newGame, #creditBtn {
+        margin-top: 30px;
+        text-align: center;
+        vertical-align: middle;
+        border: 2px solid grey;
+        border-radius: 8px;
+        background-color: white;
+        font-size: 60px;
+        width: 5em;
+        margin: 30px auto;
+       
+      }
+      #logo{
+       margin-top: 100px;
+      }
+      #container{
+        background-image: url("img/wallpaper2you_242562.png");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-attachment: fixed;
+        background-size: cover;
+        width: 100vw;
+        height: 100vh;
+      }
+    </style>
 </head>
+
 <body>
-  <canvas id="canvas" width="1415" height="700"></canvas>
+  <div class="container">
+      <div id="menu" class="">
+        <div id="logo"><img src="img/logomenu2.png"></div>
+        <div id="newGame"  onmouseover="this.style.backgroundColor = 'white'" onmouseout="this.style.backgroundColor = 'grey'"><img src="img/play.png"></div>
+        <div id="creditBtn" onmouseover="this.style.backgroundColor = 'white'" onmouseout="this.style.backgroundColor = 'grey'"><img src="img/instructions.png"></div>
+      </div>
+      <canvas id="canvas" width="1415" height="700">
+      </canvas>
+      </div>
 </body>
 </html>
