@@ -4,9 +4,12 @@ window.onload = function() {
   document.getElementById("newGame").onclick = function(){
   document.getElementById('menu').classList.add('hide')
   game.start();
- // document.getElementById("pause-btn").style.display = "block";
+  }
+  var game = new Game("canvas");
+   document.getElementById('finalmenu').classList.add('hide')
+  document.getElementById("newGame2").onclick = function(){
+    game.reset();
+     game.start();
+   document.getElementById('finalmenu').classList.add('hide')
 };
-//document.getElementById("creditBtn")
-
-  
 };

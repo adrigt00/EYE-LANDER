@@ -7,6 +7,7 @@ function Game(canvadId) {
 }
 
 Game.prototype.start = function() {
+  document.getElementById("BossBattle").play();
   this.interval = setInterval(
     function() {
       this.clear();
@@ -17,80 +18,119 @@ Game.prototype.start = function() {
         this.framesCounter = 0;
       }
 
-
       if (this.framesCounter % 70 === 0) {
         this.generateObstacle();
-      } else if (this.framesCounter % 100 === 0) {
-        this.generateAsteroids();
+      } else if (this.framesCounter % 110 === 0) {
+        this.generateLive();
       } else if (this.framesCounter % 130 === 0) {
         this.generatefireBall();
-      } else if (this.framesCounter % 90 === 0) {
+      } else if (this.framesCounter % 80 === 0) {
         this.generateAlien();
       } else if (this.framesCounter % 60 === 0) {
         this.generateCoins();
       }
-    
 
-        this.moveAll();
-        this.draw();
+      this.moveAll();
+      this.draw();
 
-       
-        this.clearObstacles();
-        this.clearAsteroids();
-        this.clearfireBall();
-        this.clearAlien();
-        this.clearCoins();
+      this.clearObstacles();
+      this.clearLive();
+      this.clearfireBall();
+      this.clearAlien();
+      this.clearCoins();
 
-        this.borderCollision();
-         if (this.isCollision()) {
-           this.gameOver();
-         } else if (this.isCollision2()) {
-          this.lives.forEach(function(live, i) {
-            this.lives.splice(i,1);
-       this.lives++;
-      }.bind(this));
-         } else if (this.isCollision3()) {
-           this.gameOver();
-         } else if (this.isCollision4()) {
-           this.gameOver();
-         }
-          else if (this.isCollision5()) {
-          this.Coins.forEach(function(coin, i) {
-               this.Coins.splice(i,1);
-          this.score++;
-        }.bind(this));
+      this.borderCollision();
+
+      if (this.collisionObstacle()) {
+        if (this.scorelives > 0) {
+
+          this.obstacles.forEach(
+            function(obstacle, i) {
+          
+              this.obstacles.splice(i, 1);
+              this.scorelives--;
+              document.getElementById("Damage").play();
+            }.bind(this)
+          );
+        } else {
+          this.gameOver();
+        }
+      } else if (this.collisionHeart()) {
+        this.Live.forEach(
+          function(asteroids, i) {
+            this.Live.splice(i, 1);
+            this.scorelives++;
+            document.getElementById("1-UP").play();
+          }.bind(this)
+        );
+      } else if (this.collisionFireball()) {
+        if (this.scorelives > 0) {
+          this.fireBall.forEach(
+            function(fireBall, i) {
+              //debugger;
+              this.fireBall.splice(i, 1);
+              this.scorelives--;
+              document.getElementById("Damage").play();
+            }.bind(this)
+          );
+        } else {
+          this.gameOver();
+        }
+      } else if (this.collisionLive()) {
+        //debugger
+        if (this.scorelives > 0) {
+          //debugger;
+          this.Alien.forEach(
+            function(Alien, i) {
+              this.Alien.splice(i, 1);
+              this.scorelives--;
+              document.getElementById("Damage").play();
+            }.bind(this)
+          );
+        } else {
+          this.gameOver();
+        }
+      } else if (this.collisionCoins()) {
+        this.Coins.forEach(
+          function(coin, i) {
+            this.Coins.splice(i, 1);
+            this.score++;
+            document.getElementById("Coin").play();
+          }.bind(this)
+        );
       }
-
     }.bind(this),
     1000 / this.fps
-  )};
+  );
+};
 
 Game.prototype.stop = function() {
-  clearInterval(this.interval);
+  document.getElementById("BossBattle").pause();
+  document.getElementById("Lose").play();
+  document.getElementById("BossBattle").currentTime = 0;
+
+  this.scorelives === 0 ? clearInterval(this.interval) : this.scorelives--;
 };
 
 Game.prototype.gameOver = function() {
+  document.getElementById('finalmenu').classList.remove('hide');
+  document.getElementById('finalmenu').classList.add('absolute');
   this.stop();
-
-  if (confirm(`Intenta superar tu puntuacion de ${this.score} pulsando en aceptar!`)) {
-    this.reset();
-    this.start();
-  }
 };
 
 Game.prototype.reset = function() {
   this.background = new Background(this);
   this.player = new Player(this);
   this.obstacles = [];
-  this.Asteroids = [];
+  this.Live = [];
   this.fireBall = [];
   this.Alien = [];
   this.Coins = [];
   this.framesCounter = 0;
   this.score = 0;
-  this.lives = 0;
+  this.scorelives = 3;
 };
-Game.prototype.isCollision = function() {
+Game.prototype.collisionObstacle = function() {
   return this.obstacles.some(
     function(obstacle) {
       return (
@@ -102,19 +142,19 @@ Game.prototype.isCollision = function() {
     }.bind(this)
   );
 };
-Game.prototype.isCollision2 = function() {
-  return this.Asteroids.some(
-    function(Asteroids) {
+Game.prototype.collisionHeart = function() {
+  return this.Live.some(
+    function(Live) {
       return (
-        this.player.x + this.player.w >= Asteroids.x &&
-        this.player.x < Asteroids.x + Asteroids.w &&
-        this.player.y + (this.player.h - 20) >= Asteroids.y &&
-        this.player.y < Asteroids.y + Asteroids.h
+        this.player.x + this.player.w >= Live.x &&
+        this.player.x < Live.x + Live.w &&
+        this.player.y + (this.player.h - 20) >= Live.y &&
+        this.player.y < Live.y + Live.h
       );
     }.bind(this)
   );
 };
-Game.prototype.isCollision3 = function() {
+Game.prototype.collisionFireball = function() {
   return this.fireBall.some(
     function(fireBall) {
       return (
@@ -126,7 +166,7 @@ Game.prototype.isCollision3 = function() {
     }.bind(this)
   );
 };
-Game.prototype.isCollision4 = function() {
+Game.prototype.collisionLive = function() {
   return this.Alien.some(
     function(Alien) {
       return (
@@ -138,7 +178,7 @@ Game.prototype.isCollision4 = function() {
     }.bind(this)
   );
 };
-Game.prototype.isCollision5 = function() {
+Game.prototype.collisionCoins = function() {
   return this.Coins.some(
     function(Coins) {
       return (
@@ -166,9 +206,9 @@ Game.prototype.clearObstacles = function() {
     return obstacle.x >= 0;
   });
 };
-Game.prototype.clearAsteroids = function() {
-  this.Asteroids = this.Asteroids.filter(function(Asteroids) {
-    return Asteroids.x >= 0;
+Game.prototype.clearLive = function() {
+  this.Live = this.Live.filter(function(Live) {
+    return Live.x >= 0;
   });
 };
 Game.prototype.clearfireBall = function() {
@@ -189,8 +229,8 @@ Game.prototype.clearCoins = function() {
 Game.prototype.generateObstacle = function() {
   this.obstacles.push(new Obstacle(this));
 };
-Game.prototype.generateAsteroids = function() {
-  this.Asteroids.push(new Asteroids(this));
+Game.prototype.generateLive = function() {
+  this.Live.push(new Live(this));
 };
 Game.prototype.generatefireBall = function() {
   this.fireBall.push(new fireBall(this));
@@ -211,7 +251,7 @@ Game.prototype.draw = function() {
   this.obstacles.forEach(function(obstacle) {
     obstacle.draw();
   });
-  this.Asteroids.forEach(function(asteroids) {
+  this.Live.forEach(function(asteroids) {
     asteroids.draw();
   });
   this.fireBall.forEach(function(fireBall) {
@@ -224,6 +264,7 @@ Game.prototype.draw = function() {
     Coins.draw();
   });
   this.drawScore();
+  this.drawScorelives();
 };
 
 Game.prototype.moveAll = function() {
@@ -232,7 +273,7 @@ Game.prototype.moveAll = function() {
   this.obstacles.forEach(function(obstacle) {
     obstacle.move();
   });
-  this.Asteroids.forEach(function(asteroids) {
+  this.Live.forEach(function(asteroids) {
     asteroids.move();
   });
   this.fireBall.forEach(function(fireBall) {
@@ -248,29 +289,11 @@ Game.prototype.moveAll = function() {
 
 Game.prototype.drawScore = function() {
   this.ctx.font = "30px sans-serif";
-  this.ctx.fillStyle = "white";
+  this.ctx.fillStyle = "gold";
   this.ctx.fillText(Math.floor(this.score), 50, 50);
 };
-Game.prototype.drawLives = function() {
+Game.prototype.drawScorelives = function() {
   this.ctx.font = "30px sans-serif";
-  this.ctx.fillStyle = "white";
-  this.ctx.fillText(Math.floor(this.Live), 70, 70);
+  this.ctx.fillStyle = "red";
+  this.ctx.fillText(Math.floor(this.scorelives), 90, 50);
 };
-
-function ballLeaveScreen() {
-  lives--;
-  if(lives) {
-      livesText.setText('Lives: '+lives);
-      lifeLostText.visible = true;
-      ball.reset(game.world.width*0.5, game.world.height-25);
-      paddle.reset(game.world.width*0.5, game.world.height-5);
-      game.input.onDown.addOnce(function(){
-          lifeLostText.visible = false;
-          ball.body.velocity.set(150, -150);
-      }, this);
-  }
-  else {
-      gameOver();
-      location.reload();
-  }
-}

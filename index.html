@@ -15,50 +15,28 @@
   <script type="text/javascript" src="./javascript/index.js"></script>
 
   <link rel="stylesheet" type="text/css" href="./style/main.css">
-  <style>
-      body {
-        font-size: 2em;
-        text-align: center;
-      }
-      #main{
-        display: none;
-      }
-      #newGame, #creditBtn {
-        margin-top: 30px;
-        text-align: center;
-        vertical-align: middle;
-        border: 2px solid grey;
-        border-radius: 8px;
-        background-color: white;
-        font-size: 60px;
-        width: 5em;
-        margin: 30px auto;
-       
-      }
-      #logo{
-       margin-top: 100px;
-      }
-      #container{
-        background-image: url("img/wallpaper2you_242562.png");
-        background-repeat: no-repeat;
-        background-position: center;
-        background-attachment: fixed;
-        background-size: cover;
-        width: 100vw;
-        height: 100vh;
-      }
-    </style>
 </head>
-
 <body>
   <div class="container">
+    <audio id="BossBattle" src="./audio/area 1.ogg"> </audio>
+    <audio id="Lose" src="./audio/LOSE.ogg"> </audio>
+    <audio id="Coin" src="./audio/smb_coin.wav"> </audio>
+    <audio id="1-UP" src="./audio/smb_1-up.wav"> </audio>
+    <audio id="Damage" src=".//audio/NFF-alien-react.wav"> </audio>
+   
       <div id="menu" class="">
         <div id="logo"><img src="img/logomenu2.png"></div>
         <div id="newGame"  onmouseover="this.style.backgroundColor = 'white'" onmouseout="this.style.backgroundColor = 'grey'"><img src="img/play.png"></div>
         <div id="creditBtn" onmouseover="this.style.backgroundColor = 'white'" onmouseout="this.style.backgroundColor = 'grey'"><img src="img/instructions.png"></div>
       </div>
-      <canvas id="canvas" width="1415" height="700">
-      </canvas>
+      <canvas id="canvas" width="1415" height="700"></canvas>
       </div>
+      <div class="container2">
+          <div id="finalmenu" class="">
+        <div id="logito"><img src="img/gameover.png"></div>
+        <div id="newGame2"  onmouseover="this.style.backgroundColor = 'white'" onmouseout="this.style.backgroundColor = 'grey'"><img src="img/play.png"></div>
+      </div>
+      </div>
+   
 </body>
 </html>

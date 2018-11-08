@@ -12,7 +12,6 @@ function Obstacle(game) {
   this.img.src = 'img/pixel-asteroid-png-3.png';
 }
 
-
 Obstacle.prototype.draw = function() {
   this.game.ctx.drawImage(this.img, this.x, this.y, 50, 55);
 };

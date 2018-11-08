@@ -1,3 +1,61 @@
 .hide {
   display: none;
 }
+
+.absolute {
+  display: absolute;
+}
+body {
+  font-size: 2em;
+  text-align: center;
+}
+#main{
+  display: none;
+}
+#newGame, #creditBtn {
+  margin-top: 30px;
+  text-align: center;
+  vertical-align: middle;
+  border: 2px solid grey;
+  border-radius: 8px;
+  background-color: white;
+  font-size: 60px;
+  width: 5em;
+  margin: 30px auto;
+ 
+}
+#logo{
+ margin-top: 100px;
+}
+.container{
+  background-image: url("img/wallpaper2you_242562.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
+  background-size: cover;
+  width: 100vw;
+  height: 100vh;
+}
+
+.container {
+  display: absolute;
+  background-image: url("img/wallpaper2you_242562.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
+  background-size: cover;
+  width: 100vw;
+  height: 100vh;
+}
+
+#newGame2 {
+  margin-top: 30px;
+  text-align: center;
+  vertical-align: middle;
+  border: 2px solid grey;
+  border-radius: 8px;
+  background-color: white;
+  font-size: 60px;
+  width: 5em;
+  margin: 30px auto;
+}
