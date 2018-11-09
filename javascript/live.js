@@ -4,7 +4,7 @@ function Live(game) {
   this.w = 50;
   this.h = 50;
 
-  this.dx = 8;
+  this.dx = 15;
 
   this.x = this.game.canvas.width;
   this.y =  Math.floor(Math.random()*(this.game.player.y0 + this.game.player.h  - 5))
