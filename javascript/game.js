@@ -43,61 +43,36 @@ Game.prototype.start = function() {
 
       if (this.collisionObstacle()) {
         if (this.scorelives > 0) {
-
-          this.obstacles.forEach(
-            function(obstacle, i) {
-          
-              this.obstacles.splice(i, 1);
+              this.obstacles.splice(0, 1);
               this.scorelives--;
               document.getElementById("Damage").play();
-            }.bind(this)
-          );
         } else {
           this.gameOver();
         }
       } else if (this.collisionHeart()) {
-        this.Live.forEach(
-          function(asteroids, i) {
-            this.Live.splice(i, 1);
+            this.Live.splice(0, 1);
             this.scorelives++;
             document.getElementById("1-UP").play();
-          }.bind(this)
-        );
       } else if (this.collisionFireball()) {
         if (this.scorelives > 0) {
-          this.fireBall.forEach(
-            function(fireBall, i) {
-              //debugger;
-              this.fireBall.splice(i, 1);
+              this.fireBall.splice(0, 1);
               this.scorelives--;
               document.getElementById("Damage").play();
-            }.bind(this)
-          );
         } else {
           this.gameOver();
         }
       } else if (this.collisionLive()) {
-        //debugger
         if (this.scorelives > 0) {
-          //debugger;
-          this.Alien.forEach(
-            function(Alien, i) {
-              this.Alien.splice(i, 1);
+              this.Alien.splice(0, 1);
               this.scorelives--;
               document.getElementById("Damage").play();
-            }.bind(this)
-          );
         } else {
           this.gameOver();
         }
       } else if (this.collisionCoins()) {
-        this.Coins.forEach(
-          function(coin, i) {
-            this.Coins.splice(i, 1);
+            this.Coins.splice(0, 1);
             this.score++;
             document.getElementById("Coin").play();
-          }.bind(this)
-        );
       }
     }.bind(this),
     1000 / this.fps
@@ -295,5 +270,5 @@ Game.prototype.drawScore = function() {
 Game.prototype.drawScorelives = function() {
   this.ctx.font = "30px sans-serif";
   this.ctx.fillStyle = "red";
-  this.ctx.fillText(Math.floor(this.scorelives), 90, 50);
+  this.ctx.fillText(Math.floor(this.scorelives), 100, 50);
 };
