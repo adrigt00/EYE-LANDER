@@ -30,24 +30,15 @@ body {
  margin-top: 100px;
 }
 .container{
-  background-image: url("img/wallpaper2you_242562.png");
-  background-repeat: no-repeat;
-  background-position: center;
-  background-attachment: fixed;
-  background-size: cover;
   width: 100vw;
   height: 100vh;
 }
 
-.container {
-  display: absolute;
-  background-image: url("img/wallpaper2you_242562.png");
-  background-repeat: no-repeat;
-  background-position: center;
-  background-attachment: fixed;
-  background-size: cover;
+#container2 {
+  display: none;
   width: 100vw;
   height: 100vh;
+  margin-top: 100px;
 }
 
 #newGame2 {

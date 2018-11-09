@@ -6,10 +6,10 @@ window.onload = function() {
   game.start();
   }
   var game = new Game("canvas");
-   document.getElementById('finalmenu').classList.add('hide')
   document.getElementById("newGame2").onclick = function(){
+  document.querySelector('.container').style.display = "block";
+  document.getElementById('container2').style.display = "none";
     game.reset();
      game.start();
-   document.getElementById('finalmenu').classList.add('hide')
 };
 };

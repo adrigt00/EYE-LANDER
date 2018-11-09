@@ -88,8 +88,8 @@ Game.prototype.stop = function() {
 };
 
 Game.prototype.gameOver = function() {
-  document.getElementById('finalmenu').classList.remove('hide');
-  document.getElementById('finalmenu').classList.add('absolute');
+  document.querySelector('.container').style.display = "none";
+  document.getElementById('container2').style.display = "block";
   this.stop();
 };
 
